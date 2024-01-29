@@ -21,6 +21,7 @@ PointVector ApproxPolyDP(PointVector curve, double epsilon, bool closed);
 void CvtColor(Mat src, Mat dst, int code);
 void EqualizeHist(Mat src, Mat dst);
 void CalcHist(struct Mats mats, IntVector chans, Mat mask, Mat hist, IntVector sz, FloatVector rng, bool acc);
+int FloodFill(Mat src, Mat mask, Point seedPoint, Scalar c, Rect* r, Scalar loDiff, Scalar upDiff, int flags);
 void CalcBackProject(struct Mats mats, IntVector chans, Mat hist, Mat backProject, FloatVector rng, bool uniform);
 double CompareHist(Mat hist1, Mat hist2, int method);
 void ConvexHull(PointVector points, Mat hull, bool clockwise, bool returnPoints);
