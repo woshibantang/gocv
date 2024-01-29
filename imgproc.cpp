@@ -98,6 +98,27 @@ struct RotatedRect FitEllipse(PointVector pts)
     return rotRect;
 }
 
+int FloodFill(Mat src, Mat mask, Point seedPoint, Scalar color, Rect* r, Scalar loDiff, Scalar upDiff, int flags) {
+    cv::Rect cvrect;
+
+    cv::Point cvPoint(seedPoint.x, seedPoint.y);
+    cv::Scalar cvscalar = cv::Scalar(color.val1, color.val2, color.val3, color.val4);
+    cv::Scalar cvlo = cv::Scalar(loDiff.val1, loDiff.val2, loDiff.val3, loDiff.val4);
+    cv::Scalar cvup = cv::Scalar(upDiff.val1, upDiff.val2, upDiff.val3, upDiff.val4);
+
+
+    int ret = cv::floodFill(*src, *mask, cvPoint, cvscalar, &cvrect, cvlo, cvup, flags);
+
+    if (r != nullptr) {
+        r->x = cvrect.x;
+        r->y = cvrect.y;
+        r->width = cvrect.width;
+        r->height = cvrect.height;
+    }
+
+    return ret;
+}
+
 void ConvexHull(PointVector points, Mat hull, bool clockwise, bool returnPoints) {
     cv::convexHull(*points, *hull, clockwise, returnPoints);
 }
